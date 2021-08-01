@@ -52,8 +52,7 @@ export class PassData {
 
     private static async signWithRemote(signData: SignData): Promise<ArrayBuffer> {
         // Load API_BASE_URL form nextjs backend
-        const configResponse = await fetch('/api/config')
-        const apiBaseUrl = (await configResponse.json()).apiBaseUrl
+        const apiBaseUrl = "https://covidpass-api.herokuapp.com"
 
         const response = await fetch(`${apiBaseUrl}/sign`, {
             method: 'POST',

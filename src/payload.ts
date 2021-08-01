@@ -175,7 +175,7 @@ export class Payload {
                     throw new Error('invalidManufacturer')
                 }
 
-                const vaccineName = valueSets.medicalProducts[medialProductKey].display.replace(/\s*\([^)]*\)\s*/g, "");
+                const vaccineName = valueSets.medicalProducts[medialProductKey].display.replace(/\s*\([^)]*\)\s*/g, " (Moderna)");
                 const manufacturer = valueSets.manufacturers[manufacturerKey].display;
 
                 data.secondaryFields.push(...[
@@ -183,7 +183,7 @@ export class Payload {
                         key: "dose",
                         label: "Dose",
                         value: dose
-                    },
+                    }, 
                     {
                         key: "dov",
                         label: "Date of Vaccination",
@@ -227,7 +227,7 @@ export class Payload {
                 const testDateTimeString = properties['sc'];
                 const testResultKey = properties['tr'];
                 const testingCentre = properties['tc'];
-
+                
                 if (!(testResultKey in valueSets.testResults)) {
                     throw new Error('invalidTestResult');
                 }
@@ -239,7 +239,7 @@ export class Payload {
                 const testType = valueSets.testTypes[testTypeKey].display;
 
                 const testTime = testDateTimeString.replace(/.*T/, '').replace('Z', ' ') + 'UTC';
-                const testDate = testDateTimeString.replace(/T.*/, '');
+                const testDate = testDateTimeString.replace(/T.*/,'');
 
                 data.secondaryFields.push(...[
                     {
@@ -338,7 +338,7 @@ export class Payload {
             default:
                 throw new Error('certificateType');
         }
-
+        
         return data;
     }
 }

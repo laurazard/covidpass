@@ -2,7 +2,6 @@ import {saveAs} from 'file-saver';
 import React, {FormEvent, useEffect, useRef, useState} from "react";
 import {BrowserQRCodeReader, IScannerControls} from "@zxing/browser";
 import {Result} from "@zxing/library";
-import {useTranslation} from 'next-i18next';
 import Link from 'next/link';
 
 import Card from "./Card";
@@ -15,7 +14,6 @@ import {COLORS} from "../src/colors";
 import Colors from './Colors';
 
 function Form(): JSX.Element {
-    const {t} = useTranslation(['index', 'errors', 'common']);
 
     // Whether camera is open or not
     const [isCameraOpen, setIsCameraOpen] = useState<boolean>(false);
@@ -40,7 +38,7 @@ function Form(): JSX.Element {
             return;
         }
 
-        const translation = t('errors:'.concat(message));
+        const translation = message;
         _setErrorMessage(translation !== message ? translation : message);
     };
 
@@ -164,21 +162,22 @@ function Form(): JSX.Element {
     return (
         <div>
             <form className="space-y-5" id="form" onSubmit={addToWallet}>
-                <Card step="1" heading={t('index:selectCertificate')} content={
+                <Card step="1" heading="Select Certificate" content={
                     <div className="space-y-5">
-                        <p>{t('index:selectCertificateDescription')}</p>
+                        <p>Please scan the QR code on your certificate or select a screenshot or PDF page with the QR code. 
+  Note that selecting a file directly from camera is not supported.</p>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                             <button
                                 type="button"
                                 onClick={isCameraOpen ? hideCameraView : showCameraView}
                                 className="focus:outline-none h-20 bg-gray-500 hover:bg-gray-700 text-white font-semibold rounded-md">
-                                {isCameraOpen ? t('index:stopCamera') : t('index:startCamera')}
+                                {isCameraOpen ? "Stop Camera" : "Start Camera"}
                             </button>
                             <button
                                 type="button"
                                 onClick={showFileDialog}
                                 className="focus:outline-none h-20 bg-gray-500 hover:bg-gray-700 text-white font-semibold rounded-md">
-                                {t('index:openFile')}
+                                    Select File
                             </button>
                         </div>
 
@@ -199,7 +198,7 @@ function Form(): JSX.Element {
                             </svg>
                             <span className="w-full truncate">
                                 {
-                                    qrCode && t('index:foundQrCode')
+                                    qrCode && "Found QR Code!"
                                 }
                                 {
                                     file && file.name
@@ -209,38 +208,39 @@ function Form(): JSX.Element {
                         }
                     </div>
                 }/>
-                <Card step="2" heading={t('index:pickColor')} content={
+                <Card step="2" heading="Pick a Color" content={
                     <div className="space-y-5">
-                        <p>{t('index:pickColorDescription')}</p>
+                        <p>Pick a background color for your pass.</p>
                         <div className="relative inline-block w-full">
                             <Colors onChange={setSelectedColor} initialValue={selectedColor}/>
                         </div>
                     </div>
                 }/>
-                <Card step="3" heading={t('index:addToWallet')} content={
+                <Card step="3" heading="Add to Wallet" content={
                     <div className="space-y-5">
                         <p>
-                            {t('index:dataPrivacyDescription')}
+                        Data privacy is of special importance when processing health-related data. 
+  In order for you to make an informed decision, please read the
                             <Link href="/privacy">
                                 <a>
-                                    {t('index:privacyPolicy')}
+                                Privacy Policy
                                 </a>
                             </Link>.
                         </p>
                         <div>
                             <ul className="list-none">
-                                <Check text={t('createdOnDevice')}/>
-                                <Check text={t('openSourceTransparent')}/>
-                                <Check text={t('hostedInEU')}/>
+                                <Check text="Created on your device"/>
+                                <Check text="Open source and transparent"/>
+                                <Check text="Hosted in the EU"/>
                             </ul>
                         </div>
                         <label htmlFor="privacy" className="flex flex-row space-x-4 items-center pb-2">
                             <input type="checkbox" id="privacy" value="privacy" required className="h-5 w-5 outline-none"/>
                             <p>
-                                {t('index:iAcceptThe')}&nbsp;
+                            I accept the&nbsp;
                                 <Link href="/privacy">
                                     <a className="underline">
-                                        {t('index:privacyPolicy')}
+                                    Privacy Policy
                                     </a>
                                 </Link>.
                             </p>
@@ -248,7 +248,7 @@ function Form(): JSX.Element {
                         <div className="flex flex-row items-center justify-start">
                             <button id="download" type="submit"
                                     className="focus:outline-none bg-green-600 py-2 px-3 text-white font-semibold rounded-md disabled:bg-gray-400">
-                                {t('index:addToWallet')}
+                                Add to Wallet
                             </button>
                             <div id="spin" className={loading ? undefined : "hidden"}>
                                 <svg className="animate-spin h-5 w-5 ml-4" viewBox="0 0 24 24">

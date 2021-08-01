@@ -1,3 +1,12 @@
+# FORK
+
+This fork was creating just as a stop-gap measure while these changes are implemented in the main project. What this fork does differently is simply showing more human readable names for some vaccines, e.g., instead of showing "Spikevax" as the vaccine, which many authorities won't recognize, this shows "Spikevax (Moderna)".
+
+A live version of this fork is available [HERE](https://covidpass.laurabrehm.io)
+
+------------------------------------
+
+
 ![CovidPass](https://covidpass.marvinsextro.de/thumbnail.png)
 
 This web app offers the ability to add your EU Digital Covid Vaccination Certificates as a pass into your favorite wallet apps on iOS/watchOS or Android/wearOS. CovidPass accomplishes this without sending your data to a server and instead only uses a hashed representation for the signing step.

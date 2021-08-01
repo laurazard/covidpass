@@ -20,7 +20,7 @@ function Logo(): JSX.Element {
                     </g>
                 </svg>
                 <h1 className="text-3xl font-bold">
-                    {t('common:title')}
+                    CovidPass
                 </h1>
             </a>
         </Link>

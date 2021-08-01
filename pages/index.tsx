@@ -1,13 +1,10 @@
 import {NextSeo} from 'next-seo';
-import {useTranslation} from 'next-i18next';
-import {serverSideTranslations} from 'next-i18next/serverSideTranslations';
 
 import Form from '../components/Form';
 import Card from '../components/Card';
 import Page from '../components/Page';
 
 function Index(): JSX.Element {
-    const { t } = useTranslation(['common', 'index', 'errors']);
 
     const title = 'CovidPass';
     const description = 'Add your EU Digital COVID Certificates to your favorite wallet app.';
@@ -40,7 +37,7 @@ function Index(): JSX.Element {
             <Page content={
                 <div className="space-y-5">
                     <Card content={
-                        <p>{t('common:subtitle')}&nbsp;{t('index:iosHint')}</p>
+                        <p>Add your EU Digital COVID Certificates to your favorite wallet apps.&nbsp;On iOS, please use the Safari Browser.</p>
                     }/>
 
                     <Form/>
@@ -50,12 +47,5 @@ function Index(): JSX.Element {
     )
 }
 
-export async function getStaticProps({ locale }) {
-    return {
-        props: {
-            ...(await serverSideTranslations(locale, ['common', 'index', 'errors'])),
-        },
-    };
-}
 
 export default Index;

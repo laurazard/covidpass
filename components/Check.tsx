@@ -1,11 +1,8 @@
-import {useTranslation} from 'next-i18next';
-
 interface CheckProps {
     text: string;
 }
 
 function Check(props: CheckProps): JSX.Element {
-  const { t } = useTranslation(["index"]);
 
   return (
     <li className="flex flex-row space-x-4 items-center">
